@@ -11,6 +11,7 @@ import ninja.leaping.configurate.loader.ConfigurationLoader;
 import ninja.leaping.configurate.objectmapping.ObjectMappingException;
 import org.slf4j.Logger;
 import org.spongepowered.api.Sponge;
+import org.spongepowered.api.block.BlockTypes;
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
@@ -209,6 +210,7 @@ public class DoubleJump {
             if (player.hasPermission("doublejump.activate") && player.get(Keys.GAME_MODE).get().equals(GameModes.SURVIVAL)) {
                 if (toggle_stop && toggled.contains(player.getUniqueId())) return;
                 if (!toggle_stop && !toggled.contains(player.getUniqueId())) return;
+                if (player.getLocation().add(0, -1, 0).getBlock().getType().equals(BlockTypes.AIR)) return;
                 player.offer(Keys.CAN_FLY, true);
             }
         }
